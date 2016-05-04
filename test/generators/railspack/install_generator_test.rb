@@ -65,11 +65,17 @@ class Railspack::Generators::InstallGeneratorTest < Rails::Generators::TestCase
 
     assert_file 'package.json' do |content|
       package = JSON.parse(content)
+      dev_deps = package['devDependencies']
       application_name = Rails.application.class.name.underscore.dasherize
 
       assert_equal package['name'], application_name
       assert_equal package['version'], '1.0.0'
-      assert_equal package['private'], true 
+      assert_equal package['private'], true
+
+      assert_equal dev_deps, {
+        'webpack' => '1.13.0',
+        'webpack-dev-server' => '1.14.1'
+      }
     end
   end
 end
