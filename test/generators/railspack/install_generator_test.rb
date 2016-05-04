@@ -1,5 +1,6 @@
 require 'test_helper'
 require 'yaml'
+require 'json'
 require 'generators/railspack/install_generator'
 
 class Railspack::Generators::InstallGeneratorTest < Rails::Generators::TestCase
@@ -74,6 +75,13 @@ class Railspack::Generators::InstallGeneratorTest < Rails::Generators::TestCase
   def test_generate_a_package_json
     run_generator
 
-    assert_file 'package.json'
+    assert_file 'package.json' do |content|
+      package = JSON.parse(content)
+      application_name = Rails.application.class.name.underscore.dasherize
+
+      assert_equal package['name'], application_name
+      assert_equal package['version'], '1.0.0'
+      assert_equal package['private'], true 
+    end
   end
 end

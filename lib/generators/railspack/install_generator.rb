@@ -10,7 +10,13 @@ module Railspack
       end
 
       def create_package_json
-        copy_file 'package.json', 'package.json'
+        template 'package.json', 'package.json'
+      end
+
+      private
+
+      def application_name
+        Rails.application.class.name.underscore.dasherize
       end
     end
   end
