@@ -18,15 +18,12 @@ end
 
 appraise 'rails41' do
   gem 'rails', '4.1.15'
-  gem 'minitest', '~> 5.0'
 end
 
 appraise 'rails42' do
   gem 'rails', '4.2.6'
-  gem 'minitest', '~> 5.0'
 end
 
 appraise 'rails50' do
   gem 'rails', '5.0.0.beta4'
-  gem 'minitest', '~> 5.0'
 end
