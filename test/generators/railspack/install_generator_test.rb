@@ -17,10 +17,6 @@ class Railspack::Generators::InstallGeneratorTest < Rails::Generators::TestCase
       config = YAML.load(content)
 
       assert_equal config['production'], {
-        'binary' => {
-          'webpack' => 'node_modules/.bin/webpack',
-          'webpack_dev_server' => 'node_modules/.bin/webpack-dev-server'
-        },
         'dev_server' => {
           'enabled' => false,
           'host' => 'localhost',
@@ -35,10 +31,6 @@ class Railspack::Generators::InstallGeneratorTest < Rails::Generators::TestCase
       }
 
       assert_equal config['development'], {
-        'binary' => {
-          'webpack' => 'node_modules/.bin/webpack',
-          'webpack_dev_server' => 'node_modules/.bin/webpack-dev-server'
-        },
         'dev_server' => {
           'enabled' => true,
           'host' => 'localhost',
@@ -53,10 +45,6 @@ class Railspack::Generators::InstallGeneratorTest < Rails::Generators::TestCase
       }
 
       assert_equal config['test'], {
-        'binary' => {
-          'webpack' => 'node_modules/.bin/webpack',
-          'webpack_dev_server' => 'node_modules/.bin/webpack-dev-server'
-        },
         'dev_server' => {
           'enabled' => false,
           'host' => 'localhost',
