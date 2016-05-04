@@ -1,7 +1,3 @@
-binary_defaults: &BINARY_DEFAULTS
-  webpack: 'node_modules/.bin/webpack'
-  webpack_dev_server: 'node_modules/.bin/webpack-dev-server'
-
 dev_server_defaults: &DEV_SERVER_DEFAULTS
   enabled: false
   host: localhost
@@ -14,16 +10,12 @@ paths_defaults: &PATHS_DEFAULTS
   manifest: 'manifest.json'
 
 production:
-  binary:
-    <<: *BINARY_DEFAULTS
   paths:
     <<: *PATHS_DEFAULTS
   dev_server:
     <<: *DEV_SERVER_DEFAULTS
 
 development:
-  binary:
-    <<: *BINARY_DEFAULTS
   paths:
     <<: *PATHS_DEFAULTS
   dev_server:
@@ -31,8 +23,6 @@ development:
     enabled: true
 
 test:
-  binary:
-    <<: *BINARY_DEFAULTS
   paths:
     <<: *PATHS_DEFAULTS
   dev_server:
