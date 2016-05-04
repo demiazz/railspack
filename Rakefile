@@ -3,8 +3,9 @@ require 'rake/testtask'
 require 'appraisal'
 
 Rake::TestTask.new(:test) do |t|
-  t.libs = %w(railspack spec)
-  t.pattern = 'spec/*_spec.rb'
+  t.libs = %w(lib test)
+  t.pattern = 'test/**/*_test.rb'
+  t.verbose = true
 end
 
 task default: :test

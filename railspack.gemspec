@@ -13,11 +13,13 @@ Gem::Specification.new do |spec|
   spec.description   = 'Tools for integrate webpack to your Rails projects'
   spec.license       = 'MIT'
 
-  spec.files       = Dir[
+  spec.name          = 'railspack'
+  spec.require_paths = ['lib']
+  spec.files         = Dir[
     'lib/**/*', 'CODE_OF_CONDUCT.md', 'Gemfile', 'Gemfile.lock', 'LICENSE.txt',
     'railspack.gemspec', 'Rakefile', 'README.md'
   ]
-  spec.test_files  = Dir['spec/**/*']
+  spec.test_files    = Dir['test/**/*']
 
   spec.add_dependency 'rails', '>= 3.1.0'
 
