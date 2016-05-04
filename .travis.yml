@@ -1,5 +1,8 @@
 language: ruby
+sudo: false
+cache: bundler
 rvm:
+  - 1.9.3
   - 2.0.0
   - 2.1.8
   - 2.2.4
@@ -11,4 +14,5 @@ gemfile:
   - gemfiles/rails41.gemfile
   - gemfiles/rails42.gemfile
   - gemfiles/rails50.gemfile
+before_install: gem install bundler
 script: bundle exec rake test
