@@ -15,7 +15,7 @@ gemfile:
   - gemfiles/rails42.gemfile
   - gemfiles/rails50.gemfile
 matrix:
-  - exclude:
+  exclude:
     - rvm: 1.9.3
       gemfile: gemfiles/rails40.gemfile
     - rvm: 1.9.3
