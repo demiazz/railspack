@@ -5,8 +5,12 @@ module Railspack
 
       source_root File.expand_path('../../templates', __FILE__)
 
-      def generate_railspack_config
+      def create_railspack_config
         copy_file 'railspack.yml', 'config/railspack.yml'
+      end
+
+      def create_package_json
+        copy_file 'package.json', 'package.json'
       end
     end
   end

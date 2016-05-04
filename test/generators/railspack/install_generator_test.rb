@@ -70,4 +70,10 @@ class Railspack::Generators::InstallGeneratorTest < Rails::Generators::TestCase
       }
     end
   end
+
+  def test_generate_a_package_json
+    run_generator
+
+    assert_file 'package.json'
+  end
 end
