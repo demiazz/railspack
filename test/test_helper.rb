@@ -1,4 +1,13 @@
 require 'rubygems'
+require 'bundler/setup'
+
+if ENV['CI']
+  require 'simplecov'
+  require 'codeclimate-test-reporter'
+
+  CodeClimate::TestReporter.start
+end
+
 require 'minitest/autorun'
 require 'minitest/pride'
 require 'rails/all'
