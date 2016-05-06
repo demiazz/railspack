@@ -4,11 +4,9 @@ require 'json'
 require 'generators/railspack/install_generator'
 
 class Railspack::Generators::InstallGeneratorTest < Rails::Generators::TestCase
-  destination File.expand_path('../../../../tmp', __FILE__)
+  include Railspack::TestSupport::Generator
 
   tests Railspack::Generators::InstallGenerator
-
-  setup :prepare_destination
 
   def test_generate_a_railspack_config
     run_generator

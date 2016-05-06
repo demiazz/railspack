@@ -26,3 +26,5 @@ class TestApp < Rails::Application
 end
 
 TestApp.initialize!
+
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
