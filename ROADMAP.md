@@ -1,6 +1,6 @@
 High priority
 
-- [ ] test coverage
+- [x] test coverage
 - [ ] webpack.config.js
 - [ ] rails helpers
 - [ ] rails manifest
