@@ -1,0 +1,8 @@
+engines:
+  rubocop:
+    enabled: true
+  eslint:
+    enabled: false
+exclude_paths:
+  gemfiles
+  lib/generators/templates/**/*
