@@ -45,6 +45,19 @@ class RailspackGeneratorsInstallPackageTest < Rails::Generators::TestCase
     end
   end
 
+  def test_package_json_contains_babel_as_dependencies
+    run_generator
+
+    assert_file 'package.json' do |content|
+      dev_deps = JSON.parse(content)['devDependencies']
+
+      assert_equal dev_deps['babel-core'], '6.8.0'
+      assert_equal dev_deps['babel-register'], '6.8.0'
+      assert_equal dev_deps['babel-preset-es2015'], '6.6.0'
+      assert_equal dev_deps['babel-plugin-transform-runtime'], '6.8.0'
+    end
+  end
+
   def test_package_json_contains_webpack_as_dependencies
     run_generator
 
@@ -53,6 +66,54 @@ class RailspackGeneratorsInstallPackageTest < Rails::Generators::TestCase
 
       assert_equal dev_deps['webpack'], '1.13.0'
       assert_equal dev_deps['webpack-dev-server'], '1.14.1'
+    end
+  end
+
+  def test_package_json_contains_webpack_loaders_as_dependencies
+    run_generator
+
+    assert_file 'package.json' do |content|
+      dev_deps = JSON.parse(content)['devDependencies']
+
+      assert_equal dev_deps['babel-loader'], '6.2.4'
+      assert_equal dev_deps['style-loader'], '0.13.1'
+      assert_equal dev_deps['css-loader'], '0.23.1'
+      assert_equal dev_deps['postcss-loader'], '0.9.1'
+    end
+  end
+
+  def test_package_json_contains_webpack_plugins_as_dependencies
+    run_generator
+
+    assert_file 'package.json' do |content|
+      dev_deps = JSON.parse(content)['devDependencies']
+
+      assert_equal dev_deps['extract-text-webpack-plugin'], '1.0.1'
+      assert_equal dev_deps['stats-webpack-plugin'], '0.3.1'
+      assert_equal dev_deps['compression-webpack-plugin'], '0.3.1'
+
+      assert_equal dev_deps['node-zopfli'], '1.4.0'
+    end
+  end
+
+  def test_package_json_contains_postcss_plugins_as_dependencies
+    run_generator
+
+    assert_file 'package.json' do |content|
+      dev_deps = JSON.parse(content)['devDependencies']
+
+      assert_equal dev_deps['autoprefixer'], '6.3.6'
+    end
+  end
+
+  def test_package_json_contains_additional_dependencies
+    run_generator
+
+    assert_file 'package.json' do |content|
+      dev_deps = JSON.parse(content)['devDependencies']
+
+      assert_equal dev_deps['js-yaml'], '3.6.0'
+      assert_equal dev_deps['normalize-object'], '1.1.4'
     end
   end
 end
