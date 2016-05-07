@@ -13,6 +13,10 @@ module Railspack
         template 'package.json', 'package.json'
       end
 
+      def create_webpack_config
+        copy_file 'webpack.config.js', 'config/webpack.config.js'
+      end
+
       private
 
       def application_name
