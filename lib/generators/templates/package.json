@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "$(npm bin)/webpack --config config/webpack.config.js",
+    "build": "$(npm bin)/webpack --config config/webpack.config.js --bail",
     "server": "$(npm bin)/webpack-dev-server --config config/webpack.config.js --inline --hot"
   },
   "devDependencies": {
