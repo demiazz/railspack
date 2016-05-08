@@ -135,4 +135,15 @@ class RailspackGeneratorsInstallTest < Rails::Generators::TestCase
       assert_includes runners, 'webpack: npm install && npm run server'
     end
   end
+
+  def test_babelrc
+    run_generator
+
+    assert_file '.babelrc' do |content|
+      config = JSON.parse(content)
+
+      assert_includes config['presets'], 'es2015'
+      assert_includes config['plugins'], 'transform-runtime'
+    end
+  end
 end

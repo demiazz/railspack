@@ -31,6 +31,10 @@ module Railspack
         end
       end
 
+      def create_babelrc
+        copy_file 'babelrc', '.babelrc'
+      end
+
       private
 
       def application_name
