@@ -1,3 +1,4 @@
+require 'rubygems'
 require 'yaml'
 require 'json'
 require 'test_helper'
@@ -100,5 +101,23 @@ class RailspackGeneratorsInstallTest < Rails::Generators::TestCase
     run_generator
 
     assert_file 'config/webpack.config.js'
+  end
+
+  def test_procfile
+    run_generator
+
+    assert_file 'Procfile' do |content|
+      runners = content.lines.map(&:strip)
+      version_with_preloader = Gem::Version.new('4.1.0')
+      current_version = Gem::Version.new(Rails.version)
+
+      if current_version < version_with_preloader
+        assert_includes runners, 'rails: bundle exec rails s -p $PORT'
+      else
+        assert_includes runners, 'rails: bin/rails s -p $PORT'
+      end
+
+      assert_includes runners, 'webpack: npm install && npm run server'
+    end
   end
 end
