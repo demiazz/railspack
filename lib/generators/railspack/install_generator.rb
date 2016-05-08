@@ -20,21 +20,14 @@ module Railspack
       end
 
       def create_procfile
-        if File.exists?(File.join(destination_root, 'Procfile'))
-          append_to_file 'Procfile' do
-            'webpack: npm install && npm run server'
-          end
+        unless File.exist?(File.join(destination_root, 'Procfile'))
+          spring = Gem::Version.new(Rails.version) >= Gem::Version.new('4.1.0')
 
-          return
+          copy_file "Procfile.#{spring ? 'spring' : 'default'}", 'Procfile'
         end
 
-        version_with_preloader = Gem::Version.new('4.1.0')
-        current_version = Gem::Version.new(Rails.version)
-
-        if current_version < version_with_preloader
-          copy_file 'Procfile.default', 'Procfile'
-        else
-          copy_file 'Procfile.preloader', 'Procfile'
+        append_to_file 'Procfile' do
+          'webpack: npm install && npm run server'
         end
       end
 
