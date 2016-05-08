@@ -4,9 +4,13 @@ module Railspack
   module TestSupport
     module Generator
       def teardown
-        return unless File.exist?(Generator.temp_directory)
+        return unless File.exist?(temp_directory)
 
-        FileUtils.rm_rf(Generator.temp_directory)
+        FileUtils.rm_rf(temp_directory)
+      end
+
+      def temp_directory
+        Generator.temp_directory
       end
 
       def self.temp_directory

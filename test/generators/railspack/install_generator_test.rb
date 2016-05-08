@@ -120,4 +120,19 @@ class RailspackGeneratorsInstallTest < Rails::Generators::TestCase
       assert_includes runners, 'webpack: npm install && npm run server'
     end
   end
+
+  def test_existing_procfile
+    File.open(File.join(temp_directory, 'Procfile'), 'w') do |file|
+      file.write "rails: custom rails runner\n"
+    end
+
+    run_generator ['--force']
+
+    assert_file 'Procfile' do |content|
+      runners = content.lines.map(&:strip)
+
+      assert_includes runners, 'rails: custom rails runner'
+      assert_includes runners, 'webpack: npm install && npm run server'
+    end
+  end
 end

@@ -20,6 +20,14 @@ module Railspack
       end
 
       def create_procfile
+        if File.exists?(File.join(destination_root, 'Procfile'))
+          append_to_file 'Procfile' do
+            'webpack: npm install && npm run server'
+          end
+
+          return
+        end
+
         version_with_preloader = Gem::Version.new('4.1.0')
         current_version = Gem::Version.new(Rails.version)
 
