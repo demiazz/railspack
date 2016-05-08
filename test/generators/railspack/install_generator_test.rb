@@ -121,6 +121,28 @@ class RailspackGeneratorsInstallTest < Rails::Generators::TestCase
     end
   end
 
+  def test_procfile
+    if ENV['CI']
+      if Gem::Version.new(Rails.version) < Gem::Version.new('4.1.0')
+        shared_tests_for_rails_without_spring_support
+      else
+        shared_tests_for_rails_with_spring_support
+      end
+    else
+      %w(3.1.0 3.2.0 4.0.0).each do |version|
+        Rails.stub :version, version do
+          shared_tests_for_rails_without_spring_support
+        end
+      end
+
+      %w(4.1.0 4.2.0 5.0.0).each do |version|
+        Rails.stub :version, version do
+          shared_tests_for_rails_with_spring_support
+        end
+      end
+    end
+  end
+
   def test_existing_procfile
     File.open(File.join(temp_directory, 'Procfile'), 'w') do |file|
       file.write "rails: custom rails runner\n"
@@ -145,5 +167,33 @@ class RailspackGeneratorsInstallTest < Rails::Generators::TestCase
       assert_includes config['presets'], 'es2015'
       assert_includes config['plugins'], 'transform-runtime'
     end
+  end
+
+  private
+
+  def shared_tests_for_rails_without_spring_support
+    run_generator
+
+    assert_file 'Procfile' do |content|
+      runners = content.lines.map(&:strip)
+
+      assert_includes runners, 'rails: bundle exec rails s -p $PORT'
+      assert_includes runners, 'webpack: npm install && npm run server'
+    end
+
+    cleanup
+  end
+
+  def shared_tests_for_rails_with_spring_support
+    run_generator
+
+    assert_file 'Procfile' do |content|
+      runners = content.lines.map(&:strip)
+
+      assert_includes runners, 'rails: bin/rails s -p $PORT'
+      assert_includes runners, 'webpack: npm install && npm run server'
+    end
+
+    cleanup
   end
 end

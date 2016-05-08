@@ -3,7 +3,7 @@ require 'fileutils'
 module Railspack
   module TestSupport
     module Generator
-      def teardown
+      def cleanup
         return unless File.exist?(temp_directory)
 
         FileUtils.rm_rf(temp_directory)
@@ -21,6 +21,7 @@ module Railspack
         mod.destination temp_directory
 
         mod.setup :prepare_destination
+        mod.teardown :cleanup
       end
     end
   end
