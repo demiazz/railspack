@@ -1,17 +1,17 @@
 High priority
 
 - [x] test coverage
-- [ ] webpack.config.js
+- [x] webpack.config.js
 - [ ] rails helpers
 - [ ] rails manifest
 - [ ] npm support
-- [ ] Procfile support
-- [ ] npm scripts
+- [x] Procfile support
+- [x] npm scripts
 
 Medium priority
 
-- [ ] postcss support
-- [ ] babel support
+- [x] postcss support
+- [x] babel support
 - [ ] polyfills
 
 Low priority
@@ -22,5 +22,5 @@ Low priority
 - [ ] flow support
 - [ ] nyc support
 - [ ] capistrano support
-- [ ] autodetect node version and using right presets for babel
+- [ ] autodetect node version and using right presets for babel (needs for ava)
 - [ ] TypeScript support (?)
