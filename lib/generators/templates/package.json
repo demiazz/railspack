@@ -2,6 +2,10 @@
   "name":    "<%= application_name %>",
   "version": "1.0.0",
   "private": true,
+  "scripts": {
+    "build": "$(npm bin)/webpack --config config/webpack.config.js",
+    "server": "$(npm bin)/webpack-dev-server --config config/webpack.config.js --inline --hot"
+  },
   "devDependencies": {
     "babel-core":                     "6.8.0",
     "babel-register":                 "6.8.0",

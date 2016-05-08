@@ -45,6 +45,23 @@ class RailspackGeneratorsInstallPackageTest < Rails::Generators::TestCase
     end
   end
 
+  def test_package_json_contains_a_scripts
+    run_generator
+
+    assert_file 'package.json' do |content|
+      scripts = JSON.parse(content)['scripts']
+
+      assert_equal(
+        scripts['build'],
+        '$(npm bin)/webpack --config config/webpack.config.js'
+      )
+      assert_equal(
+        scripts['server'],
+        '$(npm bin)/webpack-dev-server --config config/webpack.config.js --inline --hot'
+      )
+    end
+  end
+
   def test_package_json_contains_babel_as_dependencies
     run_generator
 
